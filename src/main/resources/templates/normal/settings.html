@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::common(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 offset-md-3">
+			
+			<div class="card-header display-6 text-center bg-white my-4">
+				Change Your Password
+			</div>
+			
+			<!-- Feilds validation can be added by creating new class - PasswordData having 2 feilds
+			old and new password given with all validations annotations like @NotNull, @Length etc. 
+			Similarly in request handler method of controller using @Valid - to activate all validations 
+			annotations on class feilds
+			 -->
+			<form th:action="@{/user/changepassword}" th:method="post" class="bg-white p-5">
+				<div class="mb-3">
+				    <label for="exampleInputPassword1" class="form-label">Old Password</label>
+				    <div class="d-flex">
+					    <input type="password" class="form-control" id="exampleInputPassword1" 
+					    name="oldPassword" placeholder="Enter old password here.." required="required">
+					   	<span class="password-toggle-icon m-1" id="eye-icon"><i class="btn fas fa-eye" ></i></span>
+				    </div>
+				 </div>
+				  
+			  	<div class="mb-3">
+				    <label for="exampleInputPassword2" class="form-label">New Password</label>
+				    <div class="d-flex">
+					    <input type="password" class="form-control" id="exampleInputPassword2"
+					    name="newPassword" placeholder="Enter new password here.." required="required">
+					   	<span class="password-toggle-icon m-1" id="eye-icon2"><i class="btn fas fa-eye" ></i></span>
+				    </div>
+			  	</div>
+			  	<button type="submit" class="btn btn-success">Change Password</button>
+			  	<!-- svnw kkae vhnl zfjj -->
+			  	
+			  	<!--Donate us html  -->
+			  	<div class="container mt-3 text-center">
+				<h6>Want many more free application like this,<br> <a th:href="@{/user/donateus}">Donate Us </a>- which will motivate us
+				to hustle more!
+				</h6>
+			</div>
+			</form>
+			
+			</div>
+		</div>
+	</div>
+</section>
+</body>
+</html>

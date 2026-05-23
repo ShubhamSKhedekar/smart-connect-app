@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::common(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Home</title>
+</head>
+<body>
+
+<section class="d-flex justify-content-center align-items-center flex-column bg-banner content-home text-white text-center">
+	<div class="container">
+	<div class="row">
+	<div class="col-md-8 offset-md-2">
+		<div class="display-4 mb-4">Welcome to Home Page</div>
+		<div class="">
+		 Get started with Bootstrap via npm with our starter
+		 project! Head to the twbs/bootstrap-npm-starter t
+		 emplate repository to see how to build and customize 
+		 Bootstrap in your own npm project. Includes Sass compiler, 
+		 Autoprefixer, Stylelint, PurgeCSS, and  Icons.
+		</div>
+	</div>
+	</div>
+	</div>
+	<div class="button my-3">
+		<a class="btn btn-success" th:href="@{login}" role="button">Get Started</a>
+	</div>
+	
+</section>
+
+</body>
+</html>

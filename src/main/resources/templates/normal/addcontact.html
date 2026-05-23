@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::common(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<section>
+<div class="container add-contact-form">
+	<div class="row">
+		<div class="col-md-10 offset-md-1 ">
+			<div class="card mb-4">
+				<div class="card-header text-center">
+					<div class="display-6">Add Contacts</div>
+					<div class="display-8">Contacts should be added carefully, with appropriate details</div>
+				</div>
+				<form th:action="@{/user/processaddcontactform}" 
+				th:method="POST" 
+				th:object="${contact}"
+				enctype="multipart/form-data">
+				<div class="card-body">
+					<div class="col-auto mb-3">
+					    <label class="visually-hidden" for="autoSizingInputGroup">Enter Name here</label>
+					    <div class="input-group">
+					      <div class="input-group-text"><i class="fa fa-plus" aria-hidden="true"></i>
+					      </div>
+					      <input type="text" class="form-control" id="autoSizingInputGroup" 
+					      name="name" required min="3"
+					      placeholder="Enter Name here">
+					    </div>
+					    <!-- Instead of using only required fro input validation - we can actually add
+					    input validations like signup form has 
+					     -->
+					 </div>
+					  
+					  <div class="col-auto mb-3">
+					    <label class="visually-hidden" for="autoSizingInputGroup">Enter Nick-Name here</label>
+					    <div class="input-group">
+					      <div class="input-group-text"><i class="fa fa-at" aria-hidden="true"></i>
+					      </div>
+					      <input type="text" class="form-control" id="autoSizingInputGroup" 
+					      name="secondName" required
+					      placeholder="Enter Nick-Name here">
+					      <!-- Instead of using only required fro input validation - we can actually add
+					    	input validations like signup form has 
+					     -->
+					    </div>
+					 </div>
+					  
+					  <div class="col-auto mb-3">
+					    <label class="visually-hidden" for="autoSizingInputGroup">Enter Ph.No here</label>
+					    <div class="input-group">
+					      <div class="input-group-text"><i class="fa fa-phone-square" aria-hidden="true"></i>
+					      </div>
+					      <input type="number" class="form-control" id="autoSizingInputGroup" 
+					      name="phone" required min="10" 
+					      placeholder="Enter Ph.No here">
+					    </div>
+					 </div>
+					 
+					 <div class="col-auto mb-3">
+					    <label class="visually-hidden" for="autoSizingInputGroup">Enter Email here</label>
+					    <div class="input-group">
+					      <div class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i>
+					      </div>
+					      <input type="email" class="form-control" id="autoSizingInputGroup" 
+					       name="email" required
+					      placeholder="Enter Email here">
+					    </div>
+					 </div>
+					 
+					 <div class="col-auto mb-3">
+					    <label class="visually-hidden" for="autoSizingInputGroup">Enter Occupation/Work Details here</label>
+					    <div class="input-group">
+					      <div class="input-group-text"><i class="fa fa-briefcase" aria-hidden="true"></i>
+					      </div>
+					      <input type="text" class="form-control" id="autoSizingInputGroup" 
+					      name="work" required
+					      placeholder="Enter Occupation/Work Details here">
+					    </div>
+					 </div>
+					 
+					 <div class="form-floating mb-3">
+					  <textarea class="form-control" placeholder="Leave a comment here"  
+					  name="description"
+					  id="mytextarea"
+					  style="height: 120px"></textarea>
+					  <label for="mytextarea">Enter Contact Description</label>
+					 </div>
+					 
+					 <div class="col-auto mb-3">
+					  <label for="formFile" class="form-label">Upload File</label>
+					  <input class="form-control" type="file" 
+					  name="profileimage"
+					  id="formFile">
+					 </div>
+				</div>
+				<div class="card-footer">
+					<div class="text-center pt-2">
+					   <button type="submit" class="btn btn-primary">Submit</button>
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</section>
+
+</body>
+</html>

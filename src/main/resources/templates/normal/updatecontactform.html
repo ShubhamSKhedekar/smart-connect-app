@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::common(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<section>
+<div class="container add-contact-form">
+	<div class="row">
+		<div class="col-md-10 offset-md-1 ">
+			<div class="card mb-4">
+				<div class="card-header text-center">
+					<div class="display-6">Update Contact Details</div>
+					<div class="display-8">Contacts should be updated carefully, with appropriate details</div>
+				</div>
+				<form th:action="@{/user/processupdatecontactform}" 
+				th:method="POST" 
+				th:object="${contact}"
+				enctype="multipart/form-data">
+				<div class="card-body">
+				
+				<!-- Display profile pic -->
+				<div class="container text-center my-3">
+					<img alt="profile-pic" th:src="@{'/images/'+${contact.image}}" style="border-radius:10px; height: 50vh" 
+					class="image-fluid border border-dark img-thumbnail">
+				</div>
+				<!-- Display profile pic -->
+				
+					<div class="col-auto mb-3">
+						<!-- Hidden form feild for id -->
+						<div>
+							<input type="text" th:value="${contact.cId}" name="cId" class="d-none">
+						</div>
+					
+					    <label class="visually-hidden" for="autoSizingInputGroup">Enter Name here</label>
+					    <div class="input-group">
+					      <div class="input-group-text"><i class="fa fa-plus" aria-hidden="true"></i>
+					      </div>
+					      <input type="text" class="form-control" id="autoSizingInputGroup" 
+					      name="name" required
+					      placeholder="Enter Name here" th:value="${contact.name}">
+					    </div>
+					    <!-- Instead of using only required fro input validation - we can actually add
+					    input validations like signup form has 
+					     -->
+					 </div>
+					  
+					  <div class="col-auto mb-3">
+					    <label class="visually-hidden" for="autoSizingInputGroup">Enter Nick-Name here</label>
+					    <div class="input-group">
+					      <div class="input-group-text"><i class="fa fa-at" aria-hidden="true"></i>
+					      </div>
+					      <input type="text" class="form-control" id="autoSizingInputGroup" 
+					      name="secondName" required
+					      placeholder="Enter Nick-Name here"
+					      th:value="${contact.secondName}"
+					      >
+					      <!-- Instead of using only 'required' for input validation - we can actually add
+					    	input validations like signup form has 
+					     -->
+					    </div>
+					 </div>
+					  
+					  <div class="col-auto mb-3">
+					    <label class="visually-hidden" for="autoSizingInputGroup">Enter Ph.No here</label>
+					    <div class="input-group">
+					      <div class="input-group-text"><i class="fa fa-phone-square" aria-hidden="true"></i>
+					      </div>
+					      <input type="number" class="form-control" id="autoSizingInputGroup" 
+					      name="phone" required
+					      placeholder="Enter Ph.No here" th:value="${contact.phone}">
+					    </div>
+					 </div>
+					 
+					 <div class="col-auto mb-3">
+					    <label class="visually-hidden" for="autoSizingInputGroup">Enter Email here</label>
+					    <div class="input-group">
+					      <div class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i>
+					      </div>
+					      <input type="email" class="form-control" id="autoSizingInputGroup" 
+					       name="email" required
+					      placeholder="Enter Email here" th:value="${contact.email}">
+					    </div>
+					 </div>
+					 
+					 <div class="col-auto mb-3">
+					    <label class="visually-hidden" for="autoSizingInputGroup">Enter Occupation/Work Details here</label>
+					    <div class="input-group">
+					      <div class="input-group-text"><i class="fa fa-briefcase" aria-hidden="true"></i>
+					      </div>
+					      <input type="text" class="form-control" id="autoSizingInputGroup" 
+					      name="work" required
+					      placeholder="Enter Occupation/Work Details here" th:value="${contact.work}">
+					    </div>
+					 </div>
+					 
+					 <div class="form-floating mb-3">
+					  <textarea class="form-control" placeholder="Leave a comment here"  
+					  name="description"
+					  id="mytextarea"
+					  style="height: 120px" th:utext="${contact.description}"></textarea>
+					  <label for="mytextarea">Enter Contact Description</label>
+					 </div>
+					 
+					 <div class="col-auto mb-3">
+					  <label for="formFile" class="form-label">Change Profile Image</label>
+					  <input class="form-control" type="file" 
+					  name="profileimage"
+					  id="formFile">
+					 </div>
+				</div>
+				<div class="card-footer">
+					<div class="text-center pt-2">
+					   <button type="submit" class="btn btn-primary">Submit</button>
+					</div>
+				</div>
+				</form>
+				<div class="d-flex justify-content-end" >
+			 	<a th:href="@{/user/viewcontacts/0}"  class="mx-2"><i class="fa fa-arrow-circle-left" style="font-size:36px"></i></a>
+			 	</div>
+			</div>
+		</div>
+	</div>
+</div>
+</section>
+
+</body>
+</html>

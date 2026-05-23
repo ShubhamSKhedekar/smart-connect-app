@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::common(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<section>
+
+	<div class="conatainer">
+	<div class="row">
+		<div class="col-md-10 offset-md-1">
+			<div class="card-body bg-white">
+				<div>
+				<h4>Why donate us?</h4>
+				<p>
+				Giving to charity makes you feel good! <br>
+				Life can be difficult sometimes, but remembering we're all
+				 in this together can help us feel more connected to those around us. 
+				 And by all playing our part to lend a helping hand to those in need, we can 
+				 feel more like an active part of our society.
+				</p>
+				</div>
+			</div>
+			<div class="card-footer">
+				<div class="input-group mb-3">
+				  <span class="input-group-text fw-bolder fs-5">Rs.</span>
+				  <input type="number" class="form-control fs-5" 
+				  id="amount" required
+				   placeholder="Enter Amount to be donated..">
+				</div>
+				<div>
+					<button type="button" onclick="intiatePayment()" 
+					id="donatebtn"
+					class="btn btn-dark">Donate Amount</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	
+</section>
+
+</body>
+</html>

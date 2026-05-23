@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::common(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Sign-Up Page</title>
+</head>
+<body>
+
+<section>
+<div class="container my-3">
+<div class="row">
+	<div class="col-md-6 offset-md-3">
+	<form th:action="@{/registeruser}" th:method="post" th:object="${user}">
+	<div class="card">
+		<div class="card-header text-center">
+		<div class="display-6">New User Registration</div>
+		</div>
+		
+		<div class="card-body">
+		
+		<!-- Alert Message about User Registeration
+		This alert div only shows when session.message is available -->
+		<div class="alert text-center" role="alert" th:if="${session.message}"
+		th:classappend="${session.message.className}"
+		>
+			<p th:text="${session.message.content}" class="fs-5 font-monospace"></p>
+			<!-- <th:block th:text="${#session.removeAttribute('message')}"></th:block> -- Deprecated
+			
+			We cannot use object and its methods of request, response, session, contextpath directly in 
+			thymeleaf templates
+			Need to create Class, and its method - which will allow us to use their methods like below 
+			for session we have used "class.method()" - sessionClass.removeMessageAttribute()
+			-->
+			<th:block th:text="${@sessionClass.removeMessageAttribute()}"></th:block>
+		</div>
+		
+		<div class="mb-3">
+		  <label for="exampleFormControlInput1" class="form-label">User Name</label>
+		  <input type="text" class="form-control" id="exampleFormControlInput1" 
+		  placeholder="Enter here..."
+		  name="name"
+		  th:value="${user.name}"
+		  th:classappend="${#fields.hasErrors('name')?'is-invalid':''}"
+		  >
+		<div class="invalid-feedback" th:each="e : ${#fields.errors('name')}" th:text="${e}">
+	       <!--Display error messages if any  -->
+	     </div>
+		</div>
+		
+		<div class="mb-3">
+		  <label for="exampleFormControlInput2" class="form-label">User Email address</label>
+		  <input type="email" class="form-control" id="exampleFormControlInput2" 
+		  placeholder="name@example.com"
+		  name="email"
+		  th:value="${user.email}"
+		 th:classappend="${#fields.hasErrors('email')?'is-invalid':''}"
+		  >
+		  <div class="invalid-feedback" th:each="e1 : ${#fields.errors('email')}" th:text="${e1}">
+	        <!--Display error messages if any  -->
+	      </div>
+		</div>
+		
+		<div class="mb-3">
+		  <label for="exampleFormControlInput3" class="form-label">User Password</label>
+		  <input type="password" class="form-control" id="exampleFormControlInput3" 
+		  placeholder="Enter here..."
+		  name="password"
+		  th:classappend="${#fields.hasErrors('password')?'is-invalid':''}"
+		  >
+		<div class="invalid-feedback" th:each="e2 : ${#fields.errors('password')}" th:text="${e2}">
+	        <!--Display error messages if any  -->
+      	</div>
+		</div>
+		
+		<div class="mb-3">
+		  <label for="exampleFormControlInput4" class="form-label">About Yourself</label>
+		  <textarea type="text" class="form-control" id="exampleFormControlInput4" 
+		  placeholder="Enter here..."
+		  name="about" cols="20" 
+		  th:classappend="${#fields.hasErrors('about')?'is-invalid':''}"
+		  th:text="${user.about}"
+		  ></textarea>
+	   	<div class="invalid-feedback" th:each="e3 : ${#fields.errors('about')}" th:text="${e3}">
+	        <!--Display error messages if any  -->
+     	</div>
+		</div>
+		
+		<div class="mb-3">
+	      <div class="form-check">
+	        <input class="form-check-input" type="checkbox" id="fieldsetCheck" 
+	        name="check">
+	        <label class="form-check-label fw-light fs-6" for="fieldsetCheck">
+	          Accept Terms & Conditions*
+	        </label>
+	      </div>
+    	</div>
+		</div>
+		
+		<div class="card-footer container text-center">
+			<button type="submit" class="btn btn-success">Submit</button>
+			<button type="reset" class="btn btn-secondary">Reset</button>
+		</div>
+	</div>
+	</form>
+	</div>
+</div>
+</div>
+
+</section>
+
+</body>
+</html>

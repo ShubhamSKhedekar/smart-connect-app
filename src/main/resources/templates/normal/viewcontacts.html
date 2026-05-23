@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::common(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<section>
+
+<div class="container mb-4">
+<div class="row">
+	<div class="col-md-10 offset-md-1 text-center bg-light text-dark mb-4">
+	<div class="container-fluid display-6 mb-1">Your Contacts</div>
+	<div class="display-8">All your contacts are displayed here</div>
+	</div>
+	
+	<div class="col-md-10 offset-md-1 bg-light text-dark border border-secondary border-2 rounded-2" >
+	
+		<!-- Search functionality -->
+		<div class="container mb-4">
+			<div class="input-group input-group-sm mt-3 search-div">
+			  	<span class="input-group-text" id="inputGroup-sizing-sm">Search Contacts</span>
+			  	<input onkeyup="searchContacts()" type="text" name="search" class="form-control" id="search-bar" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">	
+			</div>
+			<div class="container-fluid   result-div " id="result-block" style="display:none;">
+				<!-- searched contacts are displayed here -->
+			</div>		
+		</div>
+		<!-- Search functionality -->
+		
+		<div class="table-responsive">
+		<table class="table table-hover">
+		  <thead>
+		    <tr>
+		      <th scope="col" class="text-center">Id</th>
+		      <th scope="col" class="text-center">Name</th>
+		      <th scope="col" class="text-center">Phone & Email</th>
+		      <th scope="col" class="text-center">Occupation</th>
+		      <th scope="col" class="text-center">Action</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr th:each="c: ${contacts}">
+		      <td class="fw-bolder" scope="row" th:text="SCM + ${c.cId}"></td>
+		      <td>
+			      <div class="d-flex">
+			      <img alt="contact-profile-img" th:src="@{'/images/'+${c.image}}" class="profile-pic image-fluid mx-1">
+			      <a th:href="@{'/user/'+${c.cId}+'/viewcontactprofile'}" class="text-decoration-none fs-5 text-center" th:text="${c.name}"></a>
+			       </div>
+			  </td>
+			     
+		      <td class="text-center">
+		      	<div th:text="${c.phone}"></div>
+		      	<div class="fst-italic" th:text="${c.email}"></div>
+		      </td>
+		      <td class="text-center" th:text="${c.work}"></td>
+		      <td>
+		      	<div class="btn-group text-center" role="group" aria-label="Basic mixed styles example">
+				  <a th:href="@{'/user/'+${c.cId}+'/viewcontactprofile'}" type="button" class="btn btn-success btn-sm">View</a>
+				  <!-- For security purpose we were using method type=POST, and thatswhy we need to have form -->
+				  <form th:action="@{'/user/updatecontact/'+${c.cId}}" th:method="post">
+				  	<button type="submit" class="btn btn-warning btn-sm">Update</button> 
+				  </form>
+				  <!-- <form th:action="@{'/user/deletecontact/'+${c.cId}}" th:method="post"> -->
+				  	<button th:onclick="|deleteContactbyId(${c.cId})|" type="submit" class="btn btn-danger btn-sm">Delete</button>
+				  <!-- </form> -->
+				</div>
+		      </td>
+		    </tr>
+		  </tbody>
+		</table>
+		</div>
+	</div>
+	
+	<!-- Pagination boostrap html start-->
+	<div class="col-md-2 mt-5 mb-2 offset-md-5">
+	<nav aria-label="Page navigation example">
+	  <ul class="pagination">
+	  
+	  <!-- Previous button -->
+	  <!--th:if="${currentPage!=0}" - indicates this first page, therefore dont show prev button  -->
+	    <li class="page-item" th:if="${currentPage!=0}">
+	    <!--th:href="${currentPage-1}" - move to prev page - we do not have to worry about url beacuse class  
+	    class="page-link" helps in it
+	    -->
+	      <a class="page-link" th:href="${currentPage-1}" aria-label="Previous">
+	        <span aria-hidden="true">&laquo;</span>
+	      </a>
+	    </li>
+	    
+	    <!-- Page index -->
+	    <!--
+	    th:each="i: ${#numbers.sequence(1, totalPages)}" - looping purpose from (<start>, <end>) 
+	     -->
+	    <li class="page-item" 
+	    th:each="i: ${#numbers.sequence(1, totalPages)}"
+	    th:classappend="${(currentPage==i-1)?'active':''}">
+	    <a class="page-link" th:href="${i-1}" th:text="${i}"></a>
+	    </li>
+	    
+	    <!-- next button -->
+	    <!--th:if="${currentPage != totalPages-1}" - indicates this last page, therefore dont show next button  -->
+	    <li class="page-item" th:if="${currentPage != totalPages-1}">
+			<!--th:href="${currentPage+1}" - move to next page - we do not have to worry about url beacuse class  
+		    class="page-link" helps in it
+		    -->	    
+	      <a class="page-link" th:href="${currentPage+1}" aria-label="Next">
+	        <span aria-hidden="true">&raquo;</span>
+	      </a>
+	    </li>
+	    
+	  </ul>
+	</nav>
+	</div>
+	<!-- Pagination boostrap html end-->
+	
+</div>	
+</div>
+
+</section>
+</body>
+</html>

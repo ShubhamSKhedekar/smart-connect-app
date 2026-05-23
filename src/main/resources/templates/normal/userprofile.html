@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::common(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>User profile</title>
+</head>
+<body>
+
+<section>
+<div class="container">
+	<div class="card">
+		<div class="card-header">
+			<div class="display-4 my-3">Welcome <b th:text="${user.name}"></b> !!</div>
+			<p class="fs-5">Good to see you again:)</p>
+		</div>
+		<div class="card-body">
+			<div class="text-center my-3 bg-light">
+				<img alt="user-profile-image" th:src="@{'/images/'+${user.imageUrl}}" style="border-radius:10px" class="image-fluid">
+			</div>
+		
+			<table class="table fs-4">
+			  <tbody>
+			    <tr>
+			      <th scope="row" class="text-center">Id</th>
+			      <td class="text-center" th:text="${user.id}"></td>
+			    </tr>
+			    <tr>
+			      <th scope="row" class="text-center">Email</th>
+			      <td class="text-center" th:text="${user.email}"></td>
+			    </tr>
+			    <tr>
+			      <th scope="row" class="text-center">About</th>
+			      <td class="text-center" th:text="${user.about}"></td>
+			    </tr>
+			     <tr>
+			      <th scope="row" class="text-center">User Role</th>
+			      <td class="text-center" th:text="${user.role}"></td>
+			    </tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+<hr>
+
+</section>
+
+</body>
+</html>

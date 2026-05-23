@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::common(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<section>
+	<div class="container home-page">
+		<div class="row">
+			<div class="col-md-10 offset-md-1 text-center">
+				<div class="card mb-3">
+					<div class="card-header fs-3 my-3">
+						Hello! <span class="fw-bold" th:text="${user.name}"></span>, a Smart Contact Manager web
+						application can significantly enhance day-to-day operations in various ways;
+					</div>	
+				
+					<div class="card-body fs-5">
+					
+					<div>
+						<img class="img-fluid"  alt="img" th:src="@{/fixed-images/home4.jpg}" >
+					</div>
+					
+					<div class="container d-flex my-3">
+						<div>
+							<img class="img-fluid  userhome-img"  alt="img" th:src="@{/fixed-images/home2.jpg}" >
+						</div>
+						<div>
+							<p>
+							Centralized Contact Database helps in providing a centralized contact database for efficient 
+							communication and better contact management1. This minimizes missed tasks and ensures that all 
+							contact information is easily accessible and organized.
+							</p>
+						</div>
+					</div>
+					
+					<div class="container d-flex my-3">
+						<div>
+							<p>
+							Improved Customer Experience is by tracking buyer preferences, purchase histories, and communication
+							 history, the application can help improve the customer experience1. This leads to more personalized 
+							 interactions with customers, which can boost customer satisfaction and loyalty.
+							</p>
+						</div>
+						<div>
+							<img class="img-fluid  userhome-img"  alt="img" th:src="@{/fixed-images/home1.jpg}" >
+						</div>
+					</div>
+					
+					<div class="container d-flex my-3">
+						<div>
+							<img class="img-fluid userhome-img"  alt="img" th:src="@{/fixed-images/home3.jpeg}" >
+						</div>
+						<div>
+							<p>
+							Efficient Communication is something application ensures efficient 
+							communication within the team by providing a centralized system1. This prevents 
+							mis-communications and inconsistencies that can occur when different teams have 
+							data on separate systems.
+							</p>
+						</div>	
+					</div>
+					</div>
+					
+					<div class="card-footer ">
+					<div>Explore your contacts <a th:href="@{/user/viewcontacts/0}">here.</a> You can also add <a th:href="@{/user/addcontact}">new-contacts</a> in 
+					your database as your reach increases.
+					 </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+</body>
+</html>

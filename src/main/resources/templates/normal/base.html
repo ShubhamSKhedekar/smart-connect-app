@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="common(content)">
+<head>
+<meta charset="ISO-8859-1">
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<!-- Font awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- Jquery js integration url -->
+<!-- <script src=https://code.jquery.com/jquery-3.6.0.js></script> -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+<!-- custom css -->
+<link th:href="@{/css/style.css}" th:rel="stylesheet">
+
+<!-- TinyMCE editor for text area -->
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/m0czk6d86sueckldghiir6ysiy50xs1h1d4w7tn3zw5j0oz9/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+      tinymce.init({
+        selector: '#mytextarea'
+      });
+</script>
+<script>
+  tinymce.init({
+    selector: 'textarea',
+    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    tinycomments_mode: 'embedded',
+    tinycomments_author: 'Author name',
+    mergetags_list: [
+      { value: 'First.Name', title: 'First Name' },
+      { value: 'Email', title: 'Email' },
+    ],
+    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+  });
+</script>
+
+<title th:text="${title}">Base</title>
+</head>
+<body>
+
+<!-- Navbar starts -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-light bg-navbar fixed-top">
+  <div class="container-fluid">
+  	
+    <a class="navbar-brand" href="#"><b>Smart Contact Manager</b></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+   
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" th:href="@{/user/profile}"><strong><span class="user-name" th:text="${user.name}"></span></strong></a>
+        <a class="nav-link active" aria-current="page" th:href="@{/user/profile}">HOME</a>
+        <a class="nav-link" th:href="@{/logout}">LOGOUT</a>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- Navbar ends -->
+
+<!-- Sidebar panel starts  -->
+<div class="sidebar-panel pt-2">
+	<div class="d-flex justify-content-end m-2"><i class="fa-solid fa-xmark" id="hide-sidebar" style="font-size:20px" ></i></div>
+	<h4 class="mx-4">Menu</h4>
+	<a th:href="@{/user/home}"><i class="fa fa-home mx-2" aria-hidden="true"></i>Home</a>
+	<a th:href="@{/user/profile}"><i class="fa fa-user mx-2" aria-hidden="true"></i>Your Profile</a>
+	<a th:href="@{/user/addcontact}"><i class="fa fa-plus-circle mx-2" aria-hidden="true"></i>Add Contact</a>
+	<a th:href="@{/user/viewcontacts/0}"><i class="fa fa-address-book mx-2" aria-hidden="true"></i>View Contact</a>
+	<a th:href="@{/user/settings}"><i class="fa fa-cog mx-2" aria-hidden="true"></i>Settings</a>
+	<a th:href="@{/logout}"><i class="fa fa-arrow-circle-left mx-2" aria-hidden="true"></i>Logout</a>
+	<hr>
+</div>
+<!-- Sidebar panel ends  -->
+
+<!-- Content displayed here starts -->
+<div class="content">
+<div class="d-flex justify-content-start m-2"><i class="fa-solid fa-bars" id="show-sidebar" style="font-size:20px" ></i></div>
+
+<!-- Message start-->
+<div th:if="${session.message}" class="alert text-center display-7 col-md-10 offset-md-1" role="alert" th:classappend="${session.message.className}">
+  <span th:text="${session.message.content}"></span>
+  <th:block th:text="${@sessionClass.removeMessageAttribute()}"></th:block>
+</div>
+<!-- Message end-->
+
+<div class="actual-content" th:replace="${content}"></div>
+</div>
+<!-- Content displayed here ends -->
+
+<!-- Razorpay gateway js -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<!-- Bootstrap Js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<!-- custom js -->
+<script type="text/javascript" th:src="@{/js/myjs.js}"></script>
+
+<!-- Start: Delete contact logic implemented -->
+<!-- Sweet alert js -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+	function deleteContactbyId(cId){
+		swal({
+			  title: "Are you sure?",
+			  text: "You want to delete this contact!",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((willDelete) => {
+			  if (willDelete) {
+			    window.location="/user/deletecontact/"+cId;
+			  } else {
+			    swal("Your contact is safe!");
+			  }
+			});
+	}
+</script>
+<!-- End: Delete contact logic implemented -->
+
+
+</body>
+</html>

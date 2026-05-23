@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::common(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<section>
+<div class="container mt-5">
+		<div class="row">
+			<div class="col-md-6 offset-md-3">
+			<form th:action="@{/verifysentotp}" th:method="post">
+			
+			<!-- Alert Message about User Registeration
+			This alert div only shows when session.message is available -->
+			<div class="alert text-center" role="alert" th:if="${session.message}"
+			th:classappend="${session.message.className}"
+			>
+				<p th:text="${session.message.content}" class="fs-5 font-monospace"></p>
+				<!-- <th:block th:text="${#session.removeAttribute('message')}"></th:block> -- Deprecated
+				
+				We cannot use object and its methods of request, response, session, contextpath directly in 
+				thymeleaf templates
+				Need to create Class, and its method - which will allow us to use their methods like below 
+				for session we have used "class.method()" - sessionClass.removeMessageAttribute()
+				-->
+				<th:block th:text="${@sessionClass.removeMessageAttribute()}"></th:block>
+			</div>
+				<div class="card text-center">
+					<div class="card-header p-3">
+						<div class="display-6">
+						Please verify OTP below
+						</div>
+						<div>Otp will be received to your username</div>
+					</div>
+					<div class="card-body p-4">
+						<div class="input-group mb-3">
+						  <input type="number" class="form-control" 
+						  placeholder="Enter OTP here.." 
+						  name="userOtp"
+						  aria-label="Recipient's otp" 
+						  required="required"
+						  aria-describedby="basic-addon2">
+						</div>
+					</div>
+					<div class="card-footer p-3">
+					<button type="submit" class="btn btn-primary">Verify Otp</button>
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</section>
+</body>
+</html>

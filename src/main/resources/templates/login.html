@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::common(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Login Page</title>
+</head>
+<body>
+<section>
+
+<div class="container ">
+<div class="row">
+<div class="col-md-6 offset-md-3 mt-5">
+	<div class="card">
+	<div class="card-header text-center">
+		<h3>User Login</h3>
+		<div th:if="${param.error}" class="alert alert-danger fs-5 font-monospace" >
+	    	Invalid Credentials
+	    </div>
+	    <div th:if="${param.logout}" class="alert alert-success fs-5 font-monospace">
+	    	Logout Successfully
+	    </div>
+	    <!-- Alert Message about User Registeration
+		This alert div only shows when session.message is available -->
+		<div class="alert text-center" role="alert" th:if="${session.message}"
+		th:classappend="${session.message.className}"
+		>
+			<p th:text="${session.message.content}" class="fs-5 font-monospace"></p>
+			<!-- <th:block th:text="${#session.removeAttribute('message')}"></th:block> -- Deprecated
+			
+			We cannot use object and its methods of request, response, session, contextpath directly in 
+			thymeleaf templates
+			Need to create Class, and its method - which will allow us to use their methods like below 
+			for session we have used "class.method()" - sessionClass.removeMessageAttribute()
+			-->
+			<th:block th:text="${@sessionClass.removeMessageAttribute()}"></th:block>
+		</div>
+	</div>
+	<div class="card-body">
+	<form th:action="@{/dologin}" th:method="post">
+	  <div class="mb-3">
+	    <label for="exampleInputEmail1" class="form-label">Email address</label>
+	    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="username">
+	    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+	    
+	  </div>
+	  <div class="mb-3">
+	    <label for="exampleInputPassword1" class="form-label">Password</label>
+	    <div class="d-flex">
+	    <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+	    <span class="password-toggle-icon m-1" id="eye-icon"><i class="btn fas fa-eye" ></i></span>
+	    </div>
+	    <!--Forgot password  -->
+	    <div>
+	    	<a th:href="@{forgotpasswordsendemail}" class="link-secondary">Forgot Password</a>
+	    </div>
+	  </div>
+	  <div class="mb-3 form-check">
+	    <input type="checkbox" class="form-check-input" id="exampleCheck1" required="required">
+	    <label class="form-check-label" for="exampleCheck1">Not a Robot</label>
+	  </div>
+	  <div class="text-center">
+	  <button type="submit" class="btn btn-primary ">Submit</button>
+	  </div>
+	</form>
+	</div>
+	</div>
+</div>
+</div>
+</div>
+
+</section>
+</body>
+</html>

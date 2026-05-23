@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::common(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>User profile</title>
+</head>
+<body>
+
+<section>
+ 
+<div class="container mb-4">
+<div class="row">
+	<div class="col-md-10 offset-md-1 text-center bg-light text-dark mb-4">
+	<div class="container-fluid display-6 mb-2">Contact Details</div>
+	<div class="display-8">Take a look at your contact in detail</div>
+	</div>
+	
+ 	<div th:if="${userAccess}" class="col-md-10 offset-md-1 bg-light text-dark border border-secondary border-2 rounded-2" >
+ 	
+ 	<!-- Display profile picture -->
+	<div class="text-center my-3 bg-light">
+		<img alt="" src="" th:src="@{'/images/'+${contact.image}}" style="border-radius:10px; height: 50vh" 
+		class="image-fluid img-thumbnail" >
+	</div>
+	<div class="text-center container fs-4">
+		<span class="" th:text="${contact.name}"></span>
+		(<span class="" th:text="${contact.secondName}"></span>)
+	</div>
+ 	
+ 	<table class="table">
+	  <tbody>
+	    <tr>
+	      <th scope="row" class="text-center">Id</th>
+	      <td class="text-center" th:text="${contact.cId}"></td>
+	    </tr>
+	    <tr>
+	      <th scope="row" class="text-center">Email</th>
+	      <td class="text-center" th:text="${contact.name}"></td>
+	    </tr>
+	    <tr>
+	      <th scope="row" class="text-center">Phone</th>
+	      <td class="text-center" th:text="${contact.phone}"></td>
+	    </tr>
+	     <tr>
+	      <th scope="row" class="text-center">Occupation</th>
+	      <td class="text-center" th:text="${contact.work}"></td>
+	    </tr>
+	</table>
+	    
+	    <div class="mt-4"><b>Contact Description:</b> </div>
+	    <div th:utext="${contact.description}" class="my-1"></div>
+	    
+	 </tbody>
+	 
+	 <!-- Display buttom for delete and update contact details -->
+	 <div class="my-3 text-center">
+	 
+	 	<div class="d-flex justify-content-center">
+	 		<!-- For security purpose we were using method type=POST, and thatswhy we need to have form -->
+		 	<form th:action="@{'/user/updatecontact/'+${contact.cId}}" th:method="post">
+		 		<button type="submit" class="btn btn-warning mx-2">Update</button>
+		 	</form>
+ 		 	<!-- <form th:action="@{'/user/deletecontact/'+${contact.cId}}" th:method="post"> -->
+				<button  type="button" class="btn btn-danger" th:onclick="|deleteContactbyId(${contact.cId})|">Delete</button>
+			<!-- </form> -->
+	 	</div>
+	 	
+	 	<div class="d-flex justify-content-end" >
+	 	<a th:href="@{/user/viewcontacts/0}"  class="mx-2"><i class="fa fa-arrow-circle-left" style="font-size:36px"></i></a>
+	 	</div>
+	 </div>
+	</div>
+	
+	<!-- Display below div incase User access is invalid -->
+	 <div th:unless="${userAccess}" class="col-md-10 offset-md-1 bg-light text-dark border border-secondary 
+	 border-2 rounded-2 text-center" 
+	 >
+	 	<div class="alert alert-danger m-auto text-center">
+		 	<b>No contact details available for searched contact Id !</b>
+		</div>
+		
+		<div class="text-center my-3" >
+	 	<a th:href="@{/user/viewcontacts/0}"  class="mx-2"><i class="fa fa-arrow-circle-left" style="font-size:36px"></i></a>
+	 	</div>
+	 </div>
+	 
+ </div>
+ </div>
+</section>
+
+</body>
+</html>
